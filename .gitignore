@@ -1,0 +1,32 @@
+.DS_Store
+
+## Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+## Node / Vite
+node_modules/
+dist/
+.vite/
+
+## Local env files (do not commit secrets)
+.env
+.env.*
+*.env.local
+
+## App data
+data/*.db
+data/*.db-*
+data/*.sqlite
+data/*.sqlite-*
+
+## Logs
+*.log
+
+

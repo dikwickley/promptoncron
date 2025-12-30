@@ -1,0 +1,48 @@
+services:
+  api:
+    build: ./backend
+    command: ["python", "-m", "app.cli", "api", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./example.env
+    environment:
+      # Allow overrides even when env_file isn't copied to .env
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////app/data/promptoncron.db}
+    volumes:
+      - ./data:/app/data
+
+  scheduler:
+    build: ./backend
+    command: ["python", "-m", "app.cli", "scheduler"]
+    depends_on:
+      - api
+    env_file:
+      - ./example.env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////app/data/promptoncron.db}
+    volumes:
+      - ./data:/app/data
+
+  worker:
+    build: ./backend
+    command: ["python", "-m", "app.cli", "worker"]
+    depends_on:
+      - api
+    env_file:
+      - ./example.env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////app/data/promptoncron.db}
+    volumes:
+      - ./data:/app/data
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./example.env
+    depends_on:
+      - api
+
+

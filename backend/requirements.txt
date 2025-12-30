@@ -1,0 +1,19 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+
+SQLAlchemy==2.0.36
+pydantic==2.10.3
+pydantic-settings==2.6.1
+
+croniter==3.0.3
+httpx==0.28.1
+tenacity==9.0.0
+APScheduler==3.10.4
+
+# LLMs via LangChain (we avoid calling vendor SDKs directly in our code)
+langchain==0.3.14
+langchain-core==0.3.29
+langchain-openai==0.2.14
+langchain-google-genai==2.0.8
+
+
